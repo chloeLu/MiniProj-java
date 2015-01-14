@@ -14,7 +14,7 @@ public class NbboRecord implements Record{
 		this.ask_price = ask_price;
 		this.ask_size = ask_size;
 		this.bid_price = bid_price;
-		this.bid_size = bid_size;
+		this.bid_size = bid_size; 
 	}
 	
 	public final String getRecordType() {
