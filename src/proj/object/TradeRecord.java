@@ -10,7 +10,7 @@ public class TradeRecord implements Record {
 		this.time = time;
 		this.symbol = symbol;
 		this.qty = qty;
-		this.price = price;
+		this.price = price; 
 	}
 	
 	public final String getRecordType() {
