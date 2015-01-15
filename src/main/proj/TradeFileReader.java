@@ -1,4 +1,4 @@
-package proj;
+package main.proj;
 
 import java.io.*;
 import java.nio.file.*;
@@ -32,7 +32,8 @@ public class TradeFileReader {
 						Constants.DEFAULT_CHARSET));
 		try {
 			while ((line = reader.readLine()) != null) {
-				bw.write(preProcessRawTradeLine(line) + "\n");
+				bw.write(preProcessRawTradeLine(line));
+				bw.newLine();
 			}
 		} finally {
 			bw.close();
@@ -56,7 +57,8 @@ public class TradeFileReader {
 						Constants.DEFAULT_CHARSET));
 		try {
 			while ((line = reader.readLine()) != null) {
-				bw.write(preProcessRawNbboLine(line) + "\n");
+				bw.write(preProcessRawNbboLine(line));
+				bw.newLine();
 			}
 		} finally {
 			bw.close();
