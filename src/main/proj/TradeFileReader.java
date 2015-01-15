@@ -24,12 +24,9 @@ public class TradeFileReader {
 	 */
 	public void preProcessRawTradeFile(String pathStr) throws IOException {
 		Path path = FileSystems.getDefault().getPath("", pathStr);
-		BufferedReader reader = Files.newBufferedReader(path,
-				Constants.DEFAULT_CHARSET);
+		BufferedReader reader = Files.newBufferedReader(path, Constants.DEFAULT_CHARSET);
 		String line = reader.readLine(); // skip the first line
-		BufferedWriter bw = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(outFileName, true),
-						Constants.DEFAULT_CHARSET));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFileName, true), Constants.DEFAULT_CHARSET));
 		try {
 			while ((line = reader.readLine()) != null) {
 				bw.write(preProcessRawTradeLine(line));
@@ -49,12 +46,9 @@ public class TradeFileReader {
 	 */
 	public void preProcessRawNbboFile(String pathStr) throws IOException {
 		Path path = FileSystems.getDefault().getPath("", pathStr);
-		BufferedReader reader = Files.newBufferedReader(path,
-				Constants.DEFAULT_CHARSET);
+		BufferedReader reader = Files.newBufferedReader(path, Constants.DEFAULT_CHARSET);
 		String line = reader.readLine(); // skip the first line
-		BufferedWriter bw = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(outFileName, true),
-						Constants.DEFAULT_CHARSET));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFileName, true), Constants.DEFAULT_CHARSET));
 		try {
 			while ((line = reader.readLine()) != null) {
 				bw.write(preProcessRawNbboLine(line));
@@ -64,7 +58,7 @@ public class TradeFileReader {
 			bw.close();
 		}
 	}
-	
+
 	public String getOutFileName() {
 		return outFileName;
 	}
@@ -74,8 +68,7 @@ public class TradeFileReader {
 		// Symbol: base-10; size-16
 		// Qty: base:30; size-9
 		// Price: base:39 size:11
-		return line.substring(0, 9) + line.substring(10, 26)
-				+ line.substring(30, 50);
+		return line.substring(0, 9) + line.substring(10, 26) + line.substring(30, 50);
 	}
 
 	private String preProcessRawNbboLine(String line) {
@@ -85,6 +78,6 @@ public class TradeFileReader {
 		// Bid-Size: base-37; size-7
 		// Ask-Price: base-44; size-11
 		// Ask-Size: vase:55; size-7
-		return line.substring(0, 62);
+		return line.substring(0, 9) + line.substring(10, 62);
 	}
 }
