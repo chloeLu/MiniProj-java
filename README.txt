@@ -1,21 +1,9 @@
-IMPORTANT NOTES: 
-
-1. Data folder directory is hardcoded: <jar dir>/data. Ensure that this folder exists before running jar. ALL data files should go under this folder!
-
-2. We use these 2 data sets as initial data set:
-ftp://ftp.nyxdata.com/Historical%20Data%20Samples/Daily%20TAQ/EQY_US_ALL_NBBO_20131218.zip
-ftp://ftp.nyxdata.com/Historical%20Data%20Samples/Daily%20TAQ/EQY_US_ALL_TRADE_20131218.zip
-Extract NBBO zip under /data and rename the file as "taqnbbo20131218".
-Extract Trade zip under /data and rename the file as "taqtrade20131218".
-(These are hardcoded in TestDataGenerator)
-
-3. Considering the humongous size of the data, we make use of an open-source external sort library: https://code.google.com/p/externalsortinginjava/
-
 -------------------------------------------------
 
 REQUIRED ENV
 
-Java 7 is needed
+Java 7 is needed.
+Project built into MiniProj-0.0.1-jar-with-dependencies.jar (which already includes dependencies needed)
 
 -------------------------------------------------
 
@@ -68,5 +56,20 @@ Preprocessing completed. Time taken: 333633.67 milliseconds (5.56 minutes)
 Started external sort.
 External sort completed. Time taken: 1254864.47 milliseconds (20.91 minutes)
 Output file:./data/sortedFile
+
+-------------------------------------------------
+
+IMPORTANT NOTES: 
+
+1. Data folder directory is hardcoded: <jar dir>/data. Ensure that this folder exists before running jar. ALL data files should go under this folder!
+
+2. We use these 2 data sets as initial data set:
+ftp://ftp.nyxdata.com/Historical%20Data%20Samples/Daily%20TAQ/EQY_US_ALL_NBBO_20131218.zip
+ftp://ftp.nyxdata.com/Historical%20Data%20Samples/Daily%20TAQ/EQY_US_ALL_TRADE_20131218.zip
+Extract NBBO zip under /data and rename the file as "taqnbbo20131218".
+Extract Trade zip under /data and rename the file as "taqtrade20131218".
+(These are hardcoded in TestDataGenerator)
+
+3. Considering the humongous size of the data, we make use of an open-source external sort library: https://code.google.com/p/externalsortinginjava/
 
 -------------------------------------------------
