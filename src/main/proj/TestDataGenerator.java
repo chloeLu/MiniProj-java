@@ -20,7 +20,7 @@ public class TestDataGenerator {
 	private static final String TRADE_PATH_STR = Constants.outDir + "/taqtrade20131218";
 	private static final String NBBO_PATH_STR =  Constants.outDir + "/taqnbbo20131218";
 
-	private static final String USAGE = "java TestDataGenerator <tradeFileName> <targetTFileNumLines> <nbboFilePath> <targetNbboFileNumLines> \n";
+	private static final String USAGE = "java TestDataGenerator <baseTradeFileName> <targetTFileNumLines> <baseNbboFilePath> <targetNbboFileNumLines> \n";
 	
 	public TestDataGenerator(double probabilty, long tradeNumLines, long nbboNumLines) {
 		this.P = probabilty;
