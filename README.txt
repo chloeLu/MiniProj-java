@@ -13,6 +13,12 @@ Extract Trade zip under /data and rename the file as "taqtrade20131218"
 
 -------------------------------------------------
 
+REQUIRED ENV
+
+Java 7 is needed
+
+-------------------------------------------------
+
 USER MANUAL
 
 1. TestDataGenerator - generate test data
