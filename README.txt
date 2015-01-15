@@ -5,8 +5,8 @@ IMPORTANT NOTES:
 2. We use these 2 data sets as initial data set:
 ftp://ftp.nyxdata.com/Historical%20Data%20Samples/Daily%20TAQ/EQY_US_ALL_NBBO_20131218.zip
 ftp://ftp.nyxdata.com/Historical%20Data%20Samples/Daily%20TAQ/EQY_US_ALL_TRADE_20131218.zip
-Extract NBBO zip under /data and rename the file as "taqnbbo20131218"
-Extract Trade zip under /data and rename the file as "taqtrade20131218"
+Extract NBBO zip under /data and rename the file as "taqnbbo20131218".
+Extract Trade zip under /data and rename the file as "taqtrade20131218".
 (These are hardcoded in TestDataGenerator)
 
 3. Considering the humongous size of the data, we make use of an open-source external sort library: https://code.google.com/p/externalsortinginjava/
@@ -47,17 +47,18 @@ Usage: java -cp MiniProj-0.0.1.jar main.proj.MiniProjMain <testRawTradeFile> <te
 Example: java -cp MiniProj-0.0.1.jar main.proj.MiniProjMain test_trade_1 test_nbbo_6
 Output: combined entries sorted by time (first 9 bytes)
 		In output file, trade entries only include time[9]/symbol[16]/qty[9]/price[11]; 
-		nbbo entries include time[9]/symbol[16]/bid_price[11]/bid_size[7]/ask_price[11]/ask_size[7]
-InMoreDetails: Process takes 2 parts
-		1:generate preProcessedFile. This file contains the combined trade&nbbo data with only necessary fields
-		2:external sort based on preProcessedFile
+		nbbo entries include time[9]/symbol[16]/bid_price[11]/bid_size[7]/ask_price[11]/ask_size[7].
+InMoreDetails: Process takes 2 parts:
+		1:generate preProcessedFile. This file contains the combined trade&nbbo data with only necessary fields.
+		2:external sort based on preProcessedFile.
 -------------------------------------------------
 
 PERFORMANCE
 
-Generating output file for raw data (trade:~2G; nbbo:~22G) takes less than 30 mins on my desktop PC (normal hardware, 4-core-CPU 8GB ram no SSD)
+Generating output file for raw data (trade:~2G; nbbo:~22G) takes less than 30 mins on my desktop PC (normal hardware, 4-core-CPU 8GB ram no SSD).
 Preprocessing (discarding unused parts & combine) takes ~6 mins.
-Sorting takes ~20 mins
+Sorting takes ~20 mins.
+Final output file is around half the size of the original two files, as expected.
 
 Sample log:
 
