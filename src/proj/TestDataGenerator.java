@@ -69,6 +69,10 @@ public class TestDataGenerator {
 			generator3.generateRawNbboTestFile(Constants.outDir + "\\test_nbbo_5", nbboPathStr);
 			generator3.generateRawNbboTestFile(Constants.outDir + "\\test_nbbo_6", nbboPathStr);
 			generator3.generateRawNbboTestFile(Constants.outDir + "\\test_nbbo_7", nbboPathStr);
+			
+			TestDataGenerator generator4 = new TestDataGenerator(0.001, 10000, 10000);
+			generator4.generateRawTradeTestFile(Constants.outDir + "\\test_trade_8", tradePathStr);
+			generator4.generateRawNbboTestFile(Constants.outDir + "\\test_nbbo_8", nbboPathStr);
 		} catch (Exception e) {
 			// do nothing
 		}

@@ -27,16 +27,19 @@ public class MiniProjMain {
 	};
 
 	public static void main(String[] args) {
+		TradeFileReader reader = new TradeFileReader("../project/preProcessedFile");
 		try {
-			TradeFileReader reader = new TradeFileReader("../project/preProcessedFile");
 			long beforePreProcess = System.nanoTime();
-			reader.preProcessRawTradeFile("C:\\Working\\workspaceLuna\\project\\test_trade_1");
-			reader.preProcessRawNbboFile("C:\\Working\\workspaceLuna\\project\\test_nbbo_1");
+			reader.preProcessRawTradeFile("C:\\Working\\workspaceLuna\\project\\test_trade_8");
+			reader.preProcessRawNbboFile("C:\\Working\\workspaceLuna\\project\\test_nbbo_8");
 			long afterPreProcess = System.nanoTime();
 			System.out.println("Preprocessing completed. Time taken: " + nanoToMinuteStr(afterPreProcess - beforePreProcess) + " minutes");
-
-			System.out.println("Started external sort. Time taken: " + nanoToMinuteStr(afterPreProcess - beforePreProcess) + " minutes");
+		} catch (Exception e) {
+			System.out.println("Exception during preprocessing: " + e.getMessage());
+		}
+		try {
 			long beforeEs = System.nanoTime();
+			System.out.println("Started external sort.");
 			List<File> list = ExternalSort.sortInBatch(new File(reader.getOutFileName()), COMPARATOR, DEFAULT_MAXTEMPFILES, Constants.DEFAULT_CHARSET,
 					new File("C:\\Working\\workspaceLuna\\project"), false, 0, false);
 			ExternalSort.mergeSortedFiles(list, new File(outputFileName), COMPARATOR, Constants.DEFAULT_CHARSET, false, false, false);
@@ -44,7 +47,7 @@ public class MiniProjMain {
 			System.out.println("External sort completed. Time taken: " + nanoToMinuteStr(afterEs - beforeEs) + " minutes");
 			System.out.println("Output file:" + outputFileName);
 		} catch (Exception e) {
-			// do nothing
+			System.out.println("Exception during external sort: " + e.getMessage());
 		}
 	}
 
