@@ -1,14 +1,8 @@
 package proj;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
 
 public class TradeFileReader {
 	private final String outFileName;
@@ -19,7 +13,7 @@ public class TradeFileReader {
 
 	public TradeFileReader(String out) {
 		outFileName = out;
-		emptyOrCreateOutputFile();
+		Util.emptyOrCreateOutputFile(outFileName);
 	}
 
 	/**
@@ -87,17 +81,5 @@ public class TradeFileReader {
 		// Ask-Price: base-44; size-11
 		// Ask-Size: vase:55; size-7
 		return line.substring(0, 62);
-	}
-
-	private void emptyOrCreateOutputFile() {
-		try {
-			BufferedWriter emptyBw = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream(outFileName, false),
-					StandardCharsets.UTF_8));
-			emptyBw.write("");// appends the string to the file
-			emptyBw.close();
-		} catch (IOException ioe) {
-			System.err.println("IOException: " + ioe.getMessage());
-		}
 	}
 }

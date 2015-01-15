@@ -35,10 +35,12 @@ public class TestDataGenerator {
 	}
 
 	public void generateRawTradeTestFile(String outFileName, String baseFilePath, long numLines) throws IOException {
+		Util.emptyOrCreateOutputFile(outFileName);
 		Path path = FileSystems.getDefault().getPath("", baseFilePath);
 		BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
 		String line = reader.readLine(); // skip the first line
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFileName, true), StandardCharsets.UTF_8));
+		bw.write("Dummy line to simulate real data\n");
 		int count = 0;
 		try {
 			while ((line = reader.readLine()) != null && count < numLines) {
@@ -54,7 +56,7 @@ public class TestDataGenerator {
 
 	public static void main(String[] args) {
 		try {
-			TestDataGenerator generator1 = new TestDataGenerator(0.001, 100, 100);
+			TestDataGenerator generator1 = new TestDataGenerator(0.0001, 100, 100);
 			generator1.generateRawTradeTestFile(outDir + "test_trade_1", tradePathStr);
 			generator1.generateRawTradeTestFile(outDir + "test_trade_2", tradePathStr);
 			generator1.generateRawNbboTestFile(outDir + "test_nbbo_1", nbboPathStr);
