@@ -1,7 +1,6 @@
 package proj;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 
 public class TradeFileReader {
@@ -26,11 +25,11 @@ public class TradeFileReader {
 	public void preProcessRawTradeFile(String pathStr) throws IOException {
 		Path path = FileSystems.getDefault().getPath("", pathStr);
 		BufferedReader reader = Files.newBufferedReader(path,
-				StandardCharsets.UTF_8);
+				Constants.DEFAULT_CHARSET);
 		String line = reader.readLine(); // skip the first line
 		BufferedWriter bw = new BufferedWriter(
 				new OutputStreamWriter(new FileOutputStream(outFileName, true),
-						StandardCharsets.UTF_8));
+						Constants.DEFAULT_CHARSET));
 		try {
 			while ((line = reader.readLine()) != null) {
 				bw.write(preProcessRawTradeLine(line) + "\n");
@@ -50,11 +49,11 @@ public class TradeFileReader {
 	public void preProcessRawNbboFile(String pathStr) throws IOException {
 		Path path = FileSystems.getDefault().getPath("", pathStr);
 		BufferedReader reader = Files.newBufferedReader(path,
-				StandardCharsets.UTF_8);
+				Constants.DEFAULT_CHARSET);
 		String line = reader.readLine(); // skip the first line
 		BufferedWriter bw = new BufferedWriter(
 				new OutputStreamWriter(new FileOutputStream(outFileName, true),
-						StandardCharsets.UTF_8));
+						Constants.DEFAULT_CHARSET));
 		try {
 			while ((line = reader.readLine()) != null) {
 				bw.write(preProcessRawNbboLine(line) + "\n");
@@ -62,6 +61,10 @@ public class TradeFileReader {
 		} finally {
 			bw.close();
 		}
+	}
+	
+	public String getOutFileName() {
+		return outFileName;
 	}
 
 	private String preProcessRawTradeLine(String line) {

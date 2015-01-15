@@ -1,14 +1,8 @@
 package proj;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
 
 public class TestDataGenerator {
 
@@ -18,7 +12,7 @@ public class TestDataGenerator {
 	
 	private static final String tradePathStr = "C:\\Working\\workspaceLuna\\project\\taqtrade20131218";
 	private static final String nbboPathStr = "C:\\Working\\workspaceLuna\\project\\taqnbbo20131218";
-	private static final String outDir = "..\\project\\";
+	
 
 	public TestDataGenerator(double probabilty, long tradeNumLines, long nbboNumLines) {
 		this.P = probabilty;
@@ -57,24 +51,24 @@ public class TestDataGenerator {
 	public static void main(String[] args) {
 		try {
 			TestDataGenerator generator1 = new TestDataGenerator(0.0001, 100, 100);
-			generator1.generateRawTradeTestFile(outDir + "test_trade_1", tradePathStr);
-			generator1.generateRawTradeTestFile(outDir + "test_trade_2", tradePathStr);
-			generator1.generateRawNbboTestFile(outDir + "test_nbbo_1", nbboPathStr);
-			generator1.generateRawNbboTestFile(outDir + "test_nbbo_2", nbboPathStr);
+			generator1.generateRawTradeTestFile(Constants.outDir + "\\test_trade_1", tradePathStr);
+			generator1.generateRawTradeTestFile(Constants.outDir + "\\test_trade_2", tradePathStr);
+			generator1.generateRawNbboTestFile(Constants.outDir + "\\test_nbbo_1", nbboPathStr);
+			generator1.generateRawNbboTestFile(Constants.outDir + "\\test_nbbo_2", nbboPathStr);
 
 			TestDataGenerator generator2 = new TestDataGenerator(0.0001, 200, 200);
-			generator2.generateRawTradeTestFile(outDir + "test_trade_3", tradePathStr);
-			generator2.generateRawTradeTestFile(outDir + "test_trade_4", tradePathStr);
-			generator2.generateRawNbboTestFile(outDir + "test_nbbo_3", nbboPathStr);
-			generator2.generateRawNbboTestFile(outDir + "test_nbbo_4", nbboPathStr);
+			generator2.generateRawTradeTestFile(Constants.outDir + "\\test_trade_3", tradePathStr);
+			generator2.generateRawTradeTestFile(Constants.outDir + "\\test_trade_4", tradePathStr);
+			generator2.generateRawNbboTestFile(Constants.outDir + "\\test_nbbo_3", nbboPathStr);
+			generator2.generateRawNbboTestFile(Constants.outDir + "\\test_nbbo_4", nbboPathStr);
 
 			TestDataGenerator generator3 = new TestDataGenerator(0.0001, 1 , 1);
-			generator3.generateRawTradeTestFile(outDir + "test_trade_5", tradePathStr);
-			generator3.generateRawTradeTestFile(outDir + "test_trade_6", tradePathStr);
-			generator3.generateRawTradeTestFile(outDir + "test_trade_7", tradePathStr);
-			generator3.generateRawNbboTestFile(outDir + "test_nbbo_5", nbboPathStr);
-			generator3.generateRawNbboTestFile(outDir + "test_nbbo_6", nbboPathStr);
-			generator3.generateRawNbboTestFile(outDir + "test_nbbo_7", nbboPathStr);
+			generator3.generateRawTradeTestFile(Constants.outDir + "\\test_trade_5", tradePathStr);
+			generator3.generateRawTradeTestFile(Constants.outDir + "\\test_trade_6", tradePathStr);
+			generator3.generateRawTradeTestFile(Constants.outDir + "\\test_trade_7", tradePathStr);
+			generator3.generateRawNbboTestFile(Constants.outDir + "\\test_nbbo_5", nbboPathStr);
+			generator3.generateRawNbboTestFile(Constants.outDir + "\\test_nbbo_6", nbboPathStr);
+			generator3.generateRawNbboTestFile(Constants.outDir + "\\test_nbbo_7", nbboPathStr);
 		} catch (Exception e) {
 			// do nothing
 		}
