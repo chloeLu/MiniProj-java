@@ -20,7 +20,7 @@ public class TestDataGenerator {
 	private static final String TRADE_PATH_STR = Constants.outDir + "/taqtrade20131218";
 	private static final String NBBO_PATH_STR =  Constants.outDir + "/taqnbbo20131218";
 
-	private static final String USAGE = "java TestDataGenerator <baseTradeFilePath> <targetTFileNumLines> <baseNbboFilePath> <targetNbboFileNumLines> \n";
+	private static final String USAGE = "java TestDataGenerator <tradeFileName> <targetTFileNumLines> <nbboFilePath> <targetNbboFileNumLines> \n";
 	
 	public TestDataGenerator(double probabilty, long tradeNumLines, long nbboNumLines) {
 		this.P = probabilty;
@@ -69,9 +69,9 @@ public class TestDataGenerator {
 			}
 			System.out.println("Generating customized set of test data...");
 			try {
-				String tradePathStr = args[0];
+				String tradePathStr = Constants.outDir + "/" + args[0];
 				long tradeFileLines = Long.parseLong(args[1]);
-				String nbboPathStr = args[2];
+				String nbboPathStr = Constants.outDir + "/" + args[2];
 				long nbboFileLines = Long.parseLong(args[3]);
 				generateCustom(tradePathStr, tradeFileLines, nbboPathStr, nbboFileLines);
 				System.out.println("Done!");
