@@ -1,0 +1,5 @@
+Started preprocess.
+Preprocessing completed. Time taken: 12901.49 minutes
+Started external sort.
+External sort completed. Time taken: 36241.81 minutes
+Output file:..\project\sortedFile

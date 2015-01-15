@@ -30,8 +30,9 @@ public class MiniProjMain {
 		TradeFileReader reader = new TradeFileReader("../project/preProcessedFile");
 		try {
 			long beforePreProcess = System.nanoTime();
-			reader.preProcessRawTradeFile("C:\\Working\\workspaceLuna\\project\\test_trade_8");
-			reader.preProcessRawNbboFile("C:\\Working\\workspaceLuna\\project\\test_nbbo_8");
+			System.out.println("Started preprocess.");
+			reader.preProcessRawTradeFile("C:\\Working\\workspaceLuna\\project\\taqtrade20131218");
+			reader.preProcessRawNbboFile("C:\\Working\\workspaceLuna\\project\\taqnbbo20131218");
 			long afterPreProcess = System.nanoTime();
 			System.out.println("Preprocessing completed. Time taken: " + nanoToMinuteStr(afterPreProcess - beforePreProcess) + " minutes");
 		} catch (Exception e) {
@@ -52,6 +53,6 @@ public class MiniProjMain {
 	}
 
 	public static String nanoToMinuteStr(long nano) {
-		return DF.format(((double) nano) / 1000 / 1000 / 60);
+		return DF.format(((double) nano) / 1000 / 1000 /1000 / 60);
 	}
 }
