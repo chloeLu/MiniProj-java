@@ -61,4 +61,11 @@ Sorting takes ~20 mins
 
 Sample log:
 
+E:\Working\workspaceLuna\MiniProj-java>java -cp MiniProj-0.0.1.jar main.proj.MiniProjMain taqtrade20131218 taqnbbo20131218
+Started preprocess.
+Preprocessing completed. Time taken: 333633.67 milliseconds (5.56 minutes)
+Started external sort.
+External sort completed. Time taken: 1254864.47 milliseconds (20.91 minutes)
+Output file:./data/sortedFile
+
 -------------------------------------------------
