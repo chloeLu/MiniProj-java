@@ -7,7 +7,7 @@ ftp://ftp.nyxdata.com/Historical%20Data%20Samples/Daily%20TAQ/EQY_US_ALL_NBBO_20
 ftp://ftp.nyxdata.com/Historical%20Data%20Samples/Daily%20TAQ/EQY_US_ALL_TRADE_20131218.zip
 Extract NBBO zip under /data and rename the file as "taqnbbo20131218"
 Extract Trade zip under /data and rename the file as "taqtrade20131218"
-(These are also hardcoded values)
+(These are hardcoded in TestDataGenerator)
 
 3. Considering the humongous size of the data, we make use of an open-source external sort library: https://code.google.com/p/externalsortinginjava/
 
@@ -22,7 +22,7 @@ Java 7 is needed
 USER MANUAL
 
 1. TestDataGenerator - generate test data
-Goal: generate test data using existing trade/nbbo file
+Goal: generate test data based on existing trade/nbbo file (the one downloaded from website)
 Usage:
 	a) java -cp MiniProj-0.0.1-jar-with-dependencies.jar main.proj.TestDataGenerator
 	Effect: generate 8 sets of trade and nbbo data using exact format as provided under data folder.
