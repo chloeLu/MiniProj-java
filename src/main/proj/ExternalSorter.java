@@ -110,7 +110,7 @@ public class ExternalSorter {
 				String r = lb.pop();
 				fbw.write(r);
 				fbw.newLine();
-				if (lb.empty()) {
+				if (lb.isEmpty()) {
 					lb.closeBufferedReader();
 				} else {
 					pq.add(lb); // add it back and let pq to re-organize
@@ -139,7 +139,7 @@ class LineBuffer {
 		reload();
 	}
 
-	public boolean empty() {
+	public boolean isEmpty() {
 		return isEmpty;
 	}
 
@@ -162,7 +162,7 @@ class LineBuffer {
 	}
 
 	public String peek() {
-		if (empty())
+		if (isEmpty())
 			return null;
 		return currLine.toString();
 	}
