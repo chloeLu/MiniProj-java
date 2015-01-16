@@ -7,7 +7,7 @@ public class TradeFileReader {
 	private final String outFileName;
 
 	public TradeFileReader() {
-		this("preProcessedFile");
+		this(Constants.defaultPreProcessedFileName);
 	}
 
 	public TradeFileReader(String out) {
