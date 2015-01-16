@@ -70,6 +70,6 @@ Extract NBBO zip under /data and rename the file as "taqnbbo20131218".
 Extract Trade zip under /data and rename the file as "taqtrade20131218".
 (These are hardcoded in TestDataGenerator)
 
-3. Considering the humongous size of the data, we make use of an open-source external sort library: https://code.google.com/p/externalsortinginjava/
+3. Considering the humongous size of the data, we implemented external sort in ExternalSorter.java
 
 -------------------------------------------------
