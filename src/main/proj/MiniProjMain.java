@@ -8,20 +8,6 @@ public class MiniProjMain {
 	private static final String outputFileName = Constants.outDir + "/sortedFile";
 	private static final String USAGE = "java MiniProjMain <tradeFileName> <nbboFileName>\n";
 	
-//	private static final Comparator<String> COMPARATOR = new Comparator<String>() {
-//		@Override
-//		public int compare(String o1, String o2) {
-//			long result = Long.valueOf(o1.substring(0, 9)) - Long.valueOf(o2.substring(0, 9));
-//			if (result < 0) {
-//				return -1;
-//			} else if (result > 0) {
-//				return 1;
-//			} else {
-//				return 0;
-//			}
-//		}
-//	};
-
 	public static void main(String[] args) {
 		if (args.length < 2) {
 			System.out.println("Wrong format. Usage:" + USAGE);
@@ -29,7 +15,14 @@ public class MiniProjMain {
 		String tradeFileName = args[0];
 		String nbboFileName = args[1];
 		TradeFileReader reader = new TradeFileReader(Constants.outDir + "/preProcessedFile");
-		ExternalSorter externalSorter = new ExternalSorter();
+		ExternalSorter sorter = new ExternalSorter();
+		
+		preProcess(reader, tradeFileName, nbboFileName);
+		
+		externalSort(reader, sorter);
+	}
+	
+	private static void preProcess(TradeFileReader reader, String tradeFileName, String nbboFileName) {
 		try {
 			long beforePreProcess = System.nanoTime();
 			System.out.println("Started preprocess.");
@@ -41,14 +34,13 @@ public class MiniProjMain {
 		} catch (Exception e) {
 			System.out.println("Exception during preprocessing: " + e.getMessage());
 		}
+	}
+	
+	private static void externalSort(TradeFileReader reader, ExternalSorter sorter){
 		try {
 			long beforeEs = System.nanoTime();
 			System.out.println("Started external sort.");
-//			List<File> list = ExternalSort.sortInBatch(new File(reader.getOutFileName()), COMPARATOR, 1024, Constants.DEFAULT_CHARSET,
-//					new File(Constants.outDir), false, 0, false);
-//			ExternalSort.mergeSortedFiles(list, new File(outputFileName), COMPARATOR, Constants.DEFAULT_CHARSET, false, false, false);
-//			
-			externalSorter.externalSort(reader.getOutFileName(), outputFileName);
+			sorter.externalSort(reader.getOutFileName(), outputFileName);
 			long afterEs = System.nanoTime();
 			System.out.println("External sort completed. Time taken: " + nanoToMilliScdStr(afterEs - beforeEs) + " milliseconds ("
 					+ nanoToMinuteStr(afterEs - beforeEs) + " minutes)");

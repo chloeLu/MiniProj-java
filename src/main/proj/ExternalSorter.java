@@ -69,9 +69,9 @@ public class ExternalSorter {
 	}
 
 	public static File sortAndSave(List<String> tmplist, Comparator<String> cmp) throws IOException {
-		Collections.sort(tmplist, cmp); //
+		Collections.sort(tmplist, cmp); 
 		File newtmpfile = File.createTempFile("externalsort", "tempfile");
-		newtmpfile.deleteOnExit();
+		newtmpfile.deleteOnExit(); // Java VM deletes temp file upon exit.
 		BufferedWriter fbw = new BufferedWriter(new FileWriter(newtmpfile));
 		try {
 			for (String r : tmplist) {
@@ -84,43 +84,43 @@ public class ExternalSorter {
 		return newtmpfile;
 	}
 
-	// This merges a bunch of temporary flat files
-	// @param files
-	// @param output file
-	// @return The number of lines sorted. (P. Beaudoin)
-
-	public static int mergeSortedFiles(List<File> files, File outputfile, final Comparator<String> cmp) throws IOException {
-		PriorityQueue<BinaryFileBuffer> pq = new PriorityQueue<BinaryFileBuffer>(11, new Comparator<BinaryFileBuffer>() {
-			public int compare(BinaryFileBuffer i, BinaryFileBuffer j) {
+	/**
+	 * Merge method
+	 * Make use of a priority queue to manage all the buffers
+	 * Each buffers actually stores 1 line. 
+	 * @param files
+	 * @param outputfile
+	 * @param cmp
+	 * @throws IOException
+	 */
+	public static void mergeSortedFiles(List<File> files, File outputfile, final Comparator<String> cmp) throws IOException {
+		PriorityQueue<LineBuffer> pq = new PriorityQueue<LineBuffer>(11, new Comparator<LineBuffer>() {
+			public int compare(LineBuffer i, LineBuffer j) {
 				return cmp.compare(i.peek(), j.peek());
 			}
 		});
 		for (File f : files) {
-			BinaryFileBuffer bfb = new BinaryFileBuffer(f);
-			pq.add(bfb);
+			LineBuffer lb = new LineBuffer(f);
+			pq.add(lb);
 		}
 		BufferedWriter fbw = new BufferedWriter(new FileWriter(outputfile));
-		int rowcounter = 0;
 		try {
 			while (pq.size() > 0) {
-				BinaryFileBuffer bfb = pq.poll();
-				String r = bfb.pop();
+				LineBuffer lb = pq.poll();
+				String r = lb.pop();
 				fbw.write(r);
 				fbw.newLine();
-				++rowcounter;
-				if (bfb.empty()) {
-					bfb.fbr.close();
-					bfb.originalfile.delete();// we don't need you anymore
+				if (lb.empty()) {
+					lb.closeBufferedReader();
 				} else {
-					pq.add(bfb); // add it back
+					pq.add(lb); // add it back and let pq to re-organize
 				}
 			}
 		} finally {
 			fbw.close();
-			for (BinaryFileBuffer bfb : pq)
-				bfb.close();
+			for (LineBuffer lb : pq)
+				lb.closeBufferedReader();
 		}
-		return rowcounter;
 	}
 
 	public void externalSort(String inputFilePath, String outputFilePath) throws IOException {
@@ -129,51 +129,48 @@ public class ExternalSorter {
 	}
 }
 
-class BinaryFileBuffer {
-	public static int BUFFERSIZE = 2048;
-	public BufferedReader fbr;
-	public File originalfile;
-	private String cache;
-	private boolean empty;
+class LineBuffer {
+	private BufferedReader fbr;
+	private String currLine;
+	private boolean isEmpty;
 
-	public BinaryFileBuffer(File f) throws IOException {
-		originalfile = f;
-		fbr = new BufferedReader(new FileReader(f), BUFFERSIZE);
+	public LineBuffer(File f) throws IOException {
+		fbr = new BufferedReader(new FileReader(f));
 		reload();
 	}
 
 	public boolean empty() {
-		return empty;
+		return isEmpty;
 	}
 
 	private void reload() throws IOException {
 		try {
-			if ((this.cache = fbr.readLine()) == null) {
-				empty = true;
-				cache = null;
+			if ((this.currLine = fbr.readLine()) == null) {
+				isEmpty = true;
+				currLine = null;
 			} else {
-				empty = false;
+				isEmpty = false;
 			}
 		} catch (EOFException oef) {
-			empty = true;
-			cache = null;
+			isEmpty = true;
+			currLine = null;
 		}
 	}
 
-	public void close() throws IOException {
+	public void closeBufferedReader() throws IOException {
 		fbr.close();
 	}
 
 	public String peek() {
 		if (empty())
 			return null;
-		return cache.toString();
+		return currLine.toString();
 	}
 
 	public String pop() throws IOException {
-		String answer = peek();
+		String result = peek();
 		reload();
-		return answer;
+		return result;
 	}
 
 }
