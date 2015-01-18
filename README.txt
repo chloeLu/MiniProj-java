@@ -3,7 +3,8 @@
 REQUIRED ENV
 
 Java 7 is needed.
-Project built into MiniProj-0.0.1-jar-with-dependencies.jar (which already includes dependencies needed)
+Project built into MiniProj-0.0.1.jar
+To run it: java -cp MiniProj-0.0.1.jar <MainClass> <args>
 
 -------------------------------------------------
 
@@ -12,7 +13,7 @@ USER MANUAL
 1. TestDataGenerator - generate test data
 Goal: generate test data based on existing trade/nbbo file (the one downloaded from website)
 Usage:
-	a) java -cp MiniProj-0.0.1-jar-with-dependencies.jar main.proj.TestDataGenerator
+	a) java -cp MiniProj-0.0.1.jar main.proj.TestDataGenerator
 	Effect: generate 8 sets of trade and nbbo data using exact format as provided under data folder.
 	Name of the test files are test_trade_(1-8) and test_nbbo_(1-8). 
 	Number of lines each file contains:
@@ -25,7 +26,7 @@ Usage:
 	test_x_7: 1
 	test_x_8: 10000
 	b) java TestDataGenerator <baseTradeFilePath> <targetTFileNumLines> <baseNbboFilePath> <targetNbboFileNumLines>
-	Example: java -cp MiniProj-0.0.1-jar-with-dependencies.jar main.proj.TestDataGenerator taqtrade20131218 100 taqnbbo20131218 100
+	Example: java -cp MiniProj-0.0.1.jar main.proj.TestDataGenerator taqtrade20131218 100 taqnbbo20131218 100
 	Effect: generate 1 set of trade and nbbo data using exact format as provided.
 	Generated test data is named "test_trade_custom" and "test_nbbo_custom".
 	
@@ -47,15 +48,6 @@ Generating output file for raw data (trade:~2G; nbbo:~22G) takes less than 30 mi
 Preprocessing (discarding unused parts & combine) takes ~6 mins.
 Sorting takes ~20 mins.
 Final output file is around half the size of the original two files, as expected.
-
-Sample log:
-
-E:\Working\workspaceLuna\MiniProj-java>java -cp MiniProj-0.0.1.jar main.proj.MiniProjMain taqtrade20131218 taqnbbo20131218
-Started preprocess.
-Preprocessing completed. Time taken: 333633.67 milliseconds (5.56 minutes)
-Started external sort.
-External sort completed. Time taken: 1254864.47 milliseconds (20.91 minutes)
-Output file:./data/sortedFile
 
 -------------------------------------------------
 
