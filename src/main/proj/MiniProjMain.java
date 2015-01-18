@@ -19,7 +19,7 @@ public class MiniProjMain {
 		TradeFileReader reader = new TradeFileReader(preProcessedFileName);
 		preProcess(reader, tradeFileName, nbboFileName);
 		
-		externalSort(reader.getOutFileName(), sorter);
+		externalSort(preProcessedFileName, sorter);
 //		externalSort(preProcessedFileName, sorter);
 	}
 	
